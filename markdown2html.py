@@ -16,18 +16,37 @@ def convert_markdown_to_html(input_file, output_file):
         print(f"Missing {input_file}", file=sys.stderr)
         sys.exit(1)
 
-    # read the Markdown file and convert it to HTML
+    in_list = False
+
     with open(input_file, encoding="utf-8") as f:
         html_lines = []
         for line in f:
             # check for Markdown headings
-            match = re.match(r"^(#+) (.*)$", line)
-            if match:
-                heading_level = len(match.group(1))
-                heading_text = match.group(2)
+            match_heading = re.match(r"^(#+) (.*)$", line)
+            if match_heading:
+                heading_level = len(match_heading.group(1))
+                heading_text = match_heading.group(2)
                 html_lines.append(f"<h{heading_level}>{heading_text}</h{heading_level}>")
+                continue
+
+            # check for unordered list items
+            match_list_item = re.match(r"^- (.*)$", line)
+            if match_list_item:
+                if not in_list:
+                    html_lines.append("<ul>")
+                    in_list = True
+                list_item_text = match_list_item.group(1)
+                html_lines.append(f"    <li>{list_item_text}</li>")
             else:
-                html_lines.append(line.rstrip())
+                if in_list:
+                    html_lines.append("</ul>")
+                    in_list = False
+                # for lines that don't match any patterns, just add them directly
+                elif line.strip():  # ignore empty lines
+                    html_lines.append(line.rstrip())
+
+        if in_list:  
+            html_lines.append("</ul>")
 
     # write the HTML output to a file
     with open(output_file, "w", encoding="utf-8") as f:
