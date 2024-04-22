@@ -1,4 +1,3 @@
-
 /* SUMMARY
 1. GLOBAL
 2. LAYOUT
@@ -189,7 +188,7 @@
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
   }
-  
+
   .off-screen {
     left: -100vw;
     position: absolute;
@@ -212,9 +211,7 @@
     opacity: 1;
     transform: translateY(0);
   }
-
-
-
+  
   /*** 2. LAYOUT ***/
   
   /* Layout
@@ -601,6 +598,10 @@
     padding-top: 5rem;
   }
   
+  .article-page .header {
+    background-color: transparent;
+  }
+  
   @media only screen and (max-width: 767px) {
     .section-hero {
       margin: -0.1rem 0;
@@ -671,7 +672,7 @@
     transform: scale(1.2);
     transition: var(--transition-duration) var(--transition-cubic-bezier);
   }
-  
+
   .card-work .card-inner {
     position: absolute;
     top: -0.1rem;
@@ -681,10 +682,6 @@
     z-index: 1;
     transition: var(--transition-duration) var(--transition-cubic-bezier);
   }
-  
-  /* .card-work:hover .card-inner {
-    background-color: rgba(0, 0, 0, 0.7);
-  } */
   
   .card-work .card-title {
     text-align: center;
@@ -699,13 +696,6 @@
     padding-top: 45%;
     opacity: 0;
   }
-
-  .card-work .card-title a:focus,
-  .card-work:hover .card-title a{
-    opacity: 1;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-  }
   
   .card-work .card-title a::after {
     position: absolute;
@@ -715,10 +705,13 @@
     bottom: 0;
     content: '';
   }
-  
-  /* .card-work:hover .card-title {
+
+  .card-work .card-title a:focus,
+  .card-work:hover .card-title a {
     opacity: 1;
-  } */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
   
   @media only screen and (max-width: 767px) {
   
@@ -734,10 +727,6 @@
     .card-work .card-title a {
       display: block;
       padding: 2rem 1rem 0 1rem;
-    }
-  
-    .card-work:hover .card-inner {
-      background-color: transparent;
     }
   
     .card-work:hover .card-image {
